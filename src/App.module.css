@@ -1,0 +1,20 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    height: 100vw;
+    background-image: url('./book.jpg');
+    background-size: 102%;
+    background-repeat: no-repeat;
+    background-position: -13px -9px, center;
+}
+
+.phonebook {
+    padding-left: 210px;
+    padding-top: 180px;
+}
+.contacts {
+    max-width: 490px;
+    padding-top: 80px;
+    padding-right: 120px;
+}
