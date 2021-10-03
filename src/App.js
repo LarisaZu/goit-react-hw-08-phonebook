@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -7,12 +7,18 @@ import PrivateRoute from './components/PrivateRoute'
 import PublicRoute from './components/PublicRoute'
 import Container from './components/Container/Container';
 import AppBar from 'components/AppBar/AppBar';
-import HomeView from './views/HomeView';
-import RegisterView from './views/RegisterView';
-import LoginView from './views/LoginView';
-import ContactsView from './views/ContactsView';
 import {getIsGettingCurrentUser} from './redux/auth/auth-selectors'
 import {getCurrentUser} from './redux/auth/auth-operations';
+
+// import HomeView from './views/HomeView';
+// import RegisterView from './views/RegisterView';
+// import LoginView from './views/LoginView';
+// import ContactsView from './views/ContactsView';
+
+const HomeView = lazy(() => import('./views/HomeView' /* webpackChunkName: "home-view" */));
+const RegisterView = lazy(() => import('./views/RegisterView' /* webpackChunkName: "register-view" */));
+const LoginView = lazy(() => import('./views/LoginView' /* webpackChunkName: "login-view" */));
+const ContactsView = lazy(() => import('./views/ContactsView' /* webpackChunkName: "contacts-view" */));
 
 function App() {
     const dispatch = useDispatch();
@@ -26,6 +32,7 @@ function App() {
         (<Container>
             <AppBar />
 
+        <Suspense fallback={<h1>LOADING...</h1>}>
             <Switch>
                 <PublicRoute exact path="/">
                     <HomeView />
@@ -40,6 +47,7 @@ function App() {
                     <ContactsView />
                 </PrivateRoute>
             </Switch>
+            </Suspense>
             <ToastContainer />
         </Container>)
 );
