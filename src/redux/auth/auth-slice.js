@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { register, logIn, logOut } from './auth-operations';
+import { register, logIn, logOut, getCurrentUser } from './auth-operations';
 
 const initialState = {
     user: { name: '', email: '' },
     token: null,
     isLoggedIn: false,
     error: null,
+    isGettingCurrentUser: false,
 };
 
 const authSlice = createSlice({
@@ -23,13 +24,13 @@ const authSlice = createSlice({
         [register.fulfilled]: (state, { payload }) => {
             return {
                 ...state,
-                user: payload,
+                user: payload.user,
                 token: payload.token,
                 isLoggedIn: true,
             };
         },
-        [register.rejected]: (_, action) => {
-            toast.error(action.payload);
+        [register.rejected]: (_, { payload }) => {
+            toast.error(payload);
         },
 
         [logIn.pending]: state => {
@@ -50,7 +51,7 @@ const authSlice = createSlice({
             toast.error(payload);
             return {
                 ...state,
-                // error: "что-то",
+                error: 'что-то',
             };
         },
 
@@ -62,14 +63,32 @@ const authSlice = createSlice({
         },
         [logOut.fulfilled]: state => {
             return {
-                ...state,
-                user: { name: '', email: '' },
-                token: null,
-                isLoggedIn: false,
+                ...initialState,
             };
         },
-        [logOut.rejected]: (_, action) => {
-            toast.error(action.payload);
+        [logOut.rejected]: (_, { payload }) => {
+            toast.error(payload);
+        },
+
+        [getCurrentUser.pending]: state => {
+            return {
+                ...state,
+                isGettingCurrentUser: true,
+            };
+        },
+        [getCurrentUser.fulfilled]: (state, { payload }) => {
+            return {
+                ...state,
+                user: payload,
+                isLoggedIn: true,
+                isGettingCurrentUser: false,
+            };
+        },
+        [getCurrentUser.rejected]: state => {
+            return {
+                ...state,
+                isGettingCurrentUser: false,
+            };
         },
     },
 });

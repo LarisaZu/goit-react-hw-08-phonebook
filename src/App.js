@@ -1,36 +1,48 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import PrivateRoute from './components/PrivateRoute'
+import PublicRoute from './components/PublicRoute'
 import Container from './components/Container/Container';
 import AppBar from 'components/AppBar/AppBar';
 import HomeView from './views/HomeView';
 import RegisterView from './views/RegisterView';
 import LoginView from './views/LoginView';
 import ContactsView from './views/ContactsView';
+import {getIsGettingCurrentUser} from './redux/auth/auth-selectors'
+import {getCurrentUser} from './redux/auth/auth-operations';
 
 function App() {
-    return (
-        <Container>
+    const dispatch = useDispatch();
+    const isGettingCurrentUser = useSelector(getIsGettingCurrentUser);
+    // console.log('isGettingCurrentUser', isGettingCurrentUser);
+
+    useEffect(() => {
+        dispatch(getCurrentUser());
+    }, [dispatch]);
+    return ( !isGettingCurrentUser &&
+        (<Container>
             <AppBar />
 
             <Switch>
-                <Route exact path="/">
+                <PublicRoute exact path="/">
                     <HomeView />
-                </Route>
-                <Route path="/register">
+                </PublicRoute>
+                <PublicRoute path="/register" restricted>
                     <RegisterView />
-                </Route>
-                <Route path="/login">
+                </PublicRoute>
+                <PublicRoute path="/login" redirectTo="/contacts" restricted>
                     <LoginView />
-                </Route>
-                <Route path="/contacts">
+                </PublicRoute>
+                <PrivateRoute path="/contacts" redirectTo="/login">
                     <ContactsView />
-                </Route>
+                </PrivateRoute>
             </Switch>
             <ToastContainer />
-        </Container>
-    );
+        </Container>)
+);
 }
 
 export default App;

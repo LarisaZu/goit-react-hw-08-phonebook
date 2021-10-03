@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import {
+import { persistStore, persistReducer,
     FLUSH,
     REHYDRATE,
     PAUSE,
@@ -7,13 +7,20 @@ import {
     PURGE,
     REGISTER,
 } from 'redux-persist';
-import phonebookReducer from './contacts/contacts-reducer';
-import authSlice from './auth/auth-slice';
+import storage from 'redux-persist/lib/storage';
+import contactsReducer from './contacts/contacts-reducer';
+import authReducer from './auth/auth-slice';
 
-const store = configureStore({
+const authPersistConfig = {
+  key: 'auth',
+    storage,
+  whitelist: ['token'],
+}
+
+export const store = configureStore({
     reducer: {
-        contacts: phonebookReducer,
-        auth: authSlice,
+        auth: persistReducer(authPersistConfig, authReducer),
+        contacts: contactsReducer,
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware({
@@ -26,10 +33,9 @@ const store = configureStore({
                     PURGE,
                     REGISTER,
                 ],
-        ignoredActionPaths: ['meta.arg', 'payload.timestamp'],
             },
         }),
     devTools: process.env.NODE_ENV === 'development',
 });
 
-export default store;
+export const persistor = persistStore(store);

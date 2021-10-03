@@ -52,3 +52,24 @@ export const logOut = createAsyncThunk(
         }
     },
 );
+
+export const getCurrentUser = createAsyncThunk(
+    'auth/refresh', async(_, thunkAPI) => {
+        const state = thunkAPI.getState();
+        // console.log(state);
+        const persistedToken = state.auth.token;
+        // console.log(persistedToken);
+
+        if (persistedToken === null) {
+            return thunkAPI.rejectWithValue();
+        }
+        token.set(persistedToken);
+        try {
+            const {data}  = await axios.get('/users/current');
+            // console.log(data);
+            return data;
+        } catch(error) {
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+)
