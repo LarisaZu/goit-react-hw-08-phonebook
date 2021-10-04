@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/auth-operations';
 import s from './view.module.css';
 
 const RegisterView = () => {
     const dispatch = useDispatch();
-     const [newUser, setNewUser] = useState({
+    const [newUser, setNewUser] = useState({
         name: '',
         email: '',
         password: '',
@@ -67,7 +67,9 @@ const RegisterView = () => {
                     />
                 </label>
 
-                <button type="submit" className={s.button}>Sign Up</button>
+                <button type="submit" className={s.button}>
+                    Sign Up
+                </button>
             </form>
         </div>
     );

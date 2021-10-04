@@ -1,12 +1,16 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
-import { fetchContacts, addContact, deleteContact } from './contacts-operations';
+import {
+    fetchContacts,
+    addContact,
+    deleteContact,
+} from './contacts-operations';
 import { changeFilter } from './contacts-actions';
 
 const entities = createReducer([], {
     [fetchContacts.fulfilled]: (_, { payload }) => payload,
     [addContact.fulfilled]: (state, { payload }) => [payload, ...state],
-    [deleteContact.fulfilled]: (state, {meta}) =>
+    [deleteContact.fulfilled]: (state, { meta }) =>
         state.filter(contact => contact.id !== meta.arg),
 });
 

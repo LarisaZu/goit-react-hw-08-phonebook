@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getVisibleContacts } from 'redux/contacts/contacts-selectors';
-import { deleteContact, fetchContacts } from 'redux/contacts/contacts-operations';
+import {
+    deleteContact,
+    fetchContacts,
+} from 'redux/contacts/contacts-operations';
 import s from './ContactList.module.css';
 
 const ContactList = () => {
@@ -11,10 +14,6 @@ const ContactList = () => {
     useEffect(() => {
         dispatch(fetchContacts());
     }, [dispatch]);
-
-    // const onDelete = contactId => {
-    //     dispatch(deleteContact(contactId));
-    // };
 
     return (
         <>

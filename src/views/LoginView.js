@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {logIn} from 'redux/auth/auth-operations';
-import s from './view.module.css'
+import { useDispatch } from 'react-redux';
+import { logIn } from 'redux/auth/auth-operations';
+import s from './view.module.css';
 const LoginView = () => {
     const dispatch = useDispatch();
     const [user, setUser] = useState({ email: '', password: '' });
@@ -46,11 +46,12 @@ const LoginView = () => {
                         value={password}
                         onChange={handleChange}
                         className={s.input}
-                        
                     />
                 </label>
 
-                <button type="submit" className={s.button}>Enter</button>
+                <button type="submit" className={s.button}>
+                    Enter
+                </button>
             </form>
         </div>
     );

@@ -1,9 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import AuthNav from 'components/AuthNav/AuthNav';
 import Navigation from 'components/Navigation/Navigation';
 import UserMenu from 'components/UserMenu/UserMenu';
 import { getIsLoggedIn } from 'redux/auth/auth-selectors';
-import s from './AppBar.module.css'
+import s from './AppBar.module.css';
 
 const AppBar = () => {
     const isLoggedIn = useSelector(getIsLoggedIn);
@@ -12,7 +12,7 @@ const AppBar = () => {
         <aside className={s.navigation}>
             <Navigation />
             {isLoggedIn ? <UserMenu /> : <AuthNav />}
-                </aside>
+        </aside>
     );
 };
 

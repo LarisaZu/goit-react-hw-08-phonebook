@@ -4,10 +4,10 @@ import shortid from 'shortid';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import s from './Form.module.css';
-import {addContact} from 'redux/contacts/contacts-operations';
+import { addContact } from 'redux/contacts/contacts-operations';
 
 function Form() {
-    const allContacts = useSelector(state=> state.contacts.entities);
+    const allContacts = useSelector(state => state.contacts.entities);
     const dispatch = useDispatch();
     const [newContact, setNewContact] = useState({ name: '', number: '' });
     const { name, number } = newContact;

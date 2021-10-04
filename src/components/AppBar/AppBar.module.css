@@ -3,12 +3,11 @@
     left: 156px;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
 
     height: 279px;
     width: 143px;
     background-image: url('bookmark.png');
-    /* background-image: url('pngegg.png'); */
     background-size: 197%;
     background-repeat: no-repeat;
     background-position: center;
