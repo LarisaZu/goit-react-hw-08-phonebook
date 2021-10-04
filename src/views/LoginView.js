@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {logIn} from 'redux/auth/auth-operations';
-
+import s from './view.module.css'
 const LoginView = () => {
     const dispatch = useDispatch();
     const [user, setUser] = useState({ email: '', password: '' });
@@ -23,31 +23,34 @@ const LoginView = () => {
     };
 
     return (
-        <div>
+        <div className={s.cover_wrapper}>
             <h1>Login page</h1>
 
-            <form onSubmit={handleSubmit} autoComplete="off">
-                <label>
+            <form onSubmit={handleSubmit} autoComplete="off" className={s.form}>
+                <label className={s.label}>
                     Email address
                     <input
                         type="email"
                         name="email"
                         value={email}
                         onChange={handleChange}
+                        className={s.input}
                     />
                 </label>
 
-                <label>
+                <label className={s.label}>
                     Password
                     <input
                         type="password"
                         name="password"
                         value={password}
                         onChange={handleChange}
+                        className={s.input}
+                        
                     />
                 </label>
 
-                <button type="submit">Enter</button>
+                <button type="submit" className={s.button}>Enter</button>
             </form>
         </div>
     );

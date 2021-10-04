@@ -1,12 +1,15 @@
 .navigation {
-    position: relative;
-    display: inline-flex;
+    position: absolute;
+    left: 156px;
+    display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
+    justify-content: start;
 
-    height: 200px;
+    height: 279px;
+    width: 143px;
     background-image: url('bookmark.png');
-    /* background-size: 30%; */
+    /* background-image: url('pngegg.png'); */
+    background-size: 197%;
     background-repeat: no-repeat;
-    background-position: 0 0, center;
+    background-position: center;
 }

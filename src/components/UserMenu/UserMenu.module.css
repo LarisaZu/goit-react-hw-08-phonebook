@@ -1,0 +1,16 @@
+.user_menu {
+    margin-top: 10px;
+}
+
+.user_menu p {
+    font-size: 25px;
+    font-weight: bold;
+    color: rgb(102, 35, 8);
+}
+
+.bottom {
+    margin-top: 10px;
+    border: 2px solid rgb(102, 35, 8);
+    background-color: rgb(238, 235, 209);
+    color: rgb(102, 35, 8);
+}

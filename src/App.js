@@ -10,11 +10,6 @@ import AppBar from 'components/AppBar/AppBar';
 import {getIsGettingCurrentUser} from './redux/auth/auth-selectors'
 import {getCurrentUser} from './redux/auth/auth-operations';
 
-// import HomeView from './views/HomeView';
-// import RegisterView from './views/RegisterView';
-// import LoginView from './views/LoginView';
-// import ContactsView from './views/ContactsView';
-
 const HomeView = lazy(() => import('./views/HomeView' /* webpackChunkName: "home-view" */));
 const RegisterView = lazy(() => import('./views/RegisterView' /* webpackChunkName: "register-view" */));
 const LoginView = lazy(() => import('./views/LoginView' /* webpackChunkName: "login-view" */));
