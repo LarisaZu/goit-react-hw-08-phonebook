@@ -1,0 +1,12 @@
+.navigation {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+
+    height: 200px;
+    background-image: url('bookmark.png');
+    /* background-size: 30%; */
+    background-repeat: no-repeat;
+    background-position: 0 0, center;
+}
